@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AZEnglish Placement Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#FCFBFA;
+  --surface:#FCFBFA;
+  --surface-2:#F2F0EE;
+  --ink:#1A1210;
+  --ink-soft:#5C534F;
+  --rule:#E6E1DC;
+  --red:#E0102B;
+  --red-deep:#8F0A1C;
+  --red-tint:#FAF1DE;
+  --good:#1E7A4C;
+  --warn:#A5680A;
+  --font-display:'Lora', Georgia, serif;
+  --font-body:'Be Vietnam Pro', -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --shadow: 0 1px 0 rgba(26,18,16,.04), 0 12px 28px -18px rgba(26,18,16,.35);
+  --focus: 0 0 0 3px rgba(224,16,43,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#161211;
+    --surface:#161211;
+    --surface-2:#1F1A18;
+    --ink:#F3ECE9;
+    --ink-soft:#B8ACA6;
+    --rule:#332B28;
+    --red:#FF4D5E;
+    --red-deep:#FF8F98;
+    --red-tint:#332A16;
+    --good:#5FD394;
+    --warn:#E3AC52;
+    --shadow: 0 1px 0 rgba(0,0,0,.2), 0 20px 40px -20px rgba(0,0,0,.6);
+    --focus: 0 0 0 3px rgba(255,77,94,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161211;
+  --surface:#161211;
+  --surface-2:#1F1A18;
+  --ink:#F3ECE9;
+  --ink-soft:#B8ACA6;
+  --rule:#332B28;
+  --red:#FF4D5E;
+  --red-deep:#FF8F98;
+  --red-tint:#332A16;
+  --good:#5FD394;
+  --warn:#E3AC52;
+  --shadow: 0 1px 0 rgba(0,0,0,.2), 0 20px 40px -20px rgba(0,0,0,.6);
+  --focus: 0 0 0 3px rgba(255,77,94,.35);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:var(--font-display);
+  font-weight:700;
+  text-wrap:balance;
+  letter-spacing:-0.01em;
+}
+strong{color:var(--red); font-weight:600;}
+button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:none; box-shadow:var(--focus);
+}
+.page{
+  max-width:760px;
+  margin:0 auto;
+  padding:1.5rem 1.25rem 4rem;
+}
+.masthead{
+  display:flex;
+  align-items:center;
+  gap:0.9rem;
+  padding-bottom:1rem;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:1.25rem;
+  flex-wrap:wrap;
+}
+.logo-mark{
+  flex:none;
+  width:44px; height:44px;
+  border-radius:10px;
+  background:var(--red);
+  color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:16px;
+}
+.brand{flex:1; min-width:0;}
+.brand-eyebrow{
+  font-size:0.68rem; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--red); margin:0;
+}
+.brand-name{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:1.15rem;
+  color:var(--ink);
+  margin:0.1rem 0 0;
+}
+.theme-btn{
+  flex:none;
+  width:36px; height:36px;
+  border-radius:50%;
+  border:1px solid var(--rule);
+  background:var(--surface-2);
+  color:var(--ink);
+  cursor:pointer;
+  font-size:1rem;
+  display:flex; align-items:center; justify-content:center;
+}
+.timer{
+  font-family:var(--font-display);
+  font-variant-numeric:tabular-nums;
+  font-weight:700;
+  font-size:1.1rem;
+  color:var(--ink);
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:6px;
+  padding:0.3rem 0.65rem;
+  min-width:4.5rem;
+  text-align:center;
+}
+.timer.warn{color:var(--warn); border-color:var(--warn);}
+.timer.danger{color:var(--red); border-color:var(--red);}
+.progress-rule{
+  position:relative;
+  display:flex;
+  border-top:2px solid var(--rule);
+  padding-top:0.6rem;
+  margin-bottom:1.5rem;
+}
+.tick{
+  flex:1;
+  font-weight:700;
+  font-size:0.75rem;
+  color:var(--ink-soft);
+  display:flex;
+  align-items:baseline;
+  gap:0.4rem;
+}
+.tick span{
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  font-size:0.68rem;
+}
+.tick.active{color:var(--red); font-weight:700;}
+.tick.done{color:var(--ink);}
+.rule-fill{
+  position:absolute;
+  top:-2px; left:0;
+  height:2px;
+  background:var(--red);
+  width:0%;
+  transition:width 0.4s ease;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:10px;
+  padding:1.75rem 1.75rem 2rem;
+  box-shadow:var(--shadow);
+}
+.stage[hidden]{display:none;}
+.eyebrow{
+  font-weight:700;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin:0 0 0.5rem;
+}
+h1.display{font-size:1.9rem; margin:0 0 0.75rem;}
+h2.display{font-size:1.4rem; margin:0 0 0.4rem;}
+p{line-height:1.65; color:var(--ink);}
+.muted{color:var(--ink-soft); font-size:0.92rem;}
+.lede{font-size:1.02rem; color:var(--ink-soft); max-width:60ch;}
+ul.plain{padding-left:1.1rem; margin:0.75rem 0;}
+ul.plain li{margin-bottom:0.4rem; line-height:1.55;}
+.reg-fields{
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+  margin-top:1rem;
+}
+.field label{
+  display:block; font-size:0.8rem; color:var(--ink-soft);
+  margin-bottom:0.35rem;
+}
+.field input{
+  width:100%;
+  border:1px solid var(--rule);
+  border-radius:7px;
+  padding:0.65rem 0.8rem;
+  font-family:var(--font-body);
+  font-size:0.95rem;
+  color:var(--ink);
+  background:var(--surface);
+}
+.field input:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
+@media (max-width:520px){
+  .reg-fields{grid-template-columns:1fr;}
+}
+.btn{
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:0.95rem;
+  border:none;
+  border-radius:7px;
+  padding:0.75rem 1.4rem;
+  cursor:pointer;
+  transition:transform 0.08s ease, opacity 0.15s ease;
+}
+.btn-primary{background:var(--red); color:#fff;}
+.btn-primary:hover{background:var(--red-deep);}
+.btn-primary:disabled{opacity:0.4; cursor:not-allowed;}
+.btn-primary:active:not(:disabled){transform:translateY(1px);}
+.btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--rule);}
+.btn-ghost:hover{border-color:var(--ink-soft);}
+.btn-row{display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.75rem;}
+.passage{
+  background:var(--surface-2);
+  border-left:3px solid var(--rule);
+  padding:1rem 1.15rem;
+  margin:1rem 0 1.5rem;
+  font-size:0.98rem;
+  line-height:1.7;
+}
+.q-block{margin-bottom:1.5rem;}
+.q-block:last-child{margin-bottom:0;}
+.q-num{
+  font-family:var(--font-display);
+  font-weight:700;
+  color:var(--red);
+  font-size:0.85rem;
+  margin-right:0.4rem;
+}
+.q-text{font-weight:600; margin-bottom:0.65rem;}
+.opts{display:flex; flex-direction:column; gap:0.5rem;}
+.opt{
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+  padding:0.6rem 0.8rem;
+  border:1px solid var(--rule);
+  border-radius:7px;
+  background:var(--surface);
+  cursor:pointer;
+  text-align:left;
+  font-family:var(--font-body);
+  font-size:0.93rem;
+  color:var(--ink);
+}
+.opt:hover{border-color:var(--ink-soft);}
+.opt:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
+.opt.selected{border-color:var(--red); background:var(--red-tint);}
+.opt-letter{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:0.78rem;
+  width:1.6rem; height:1.6rem;
+  border-radius:50%;
+  border:1.5px solid var(--rule);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  color:var(--ink-soft);
+}
+.opt.selected .opt-letter{border-color:var(--red); color:var(--red); background:#fff;}
+.speed-toggle{
+  display:flex; align-items:center; flex-wrap:wrap;
+  gap:0.5rem;
+  margin-bottom:1.1rem;
+}
+.speed-label{
+  font-size:0.8rem; color:var(--ink-soft); margin-right:0.15rem;
+}
+.speed-opt{
+  font-family:var(--font-body);
+  font-size:0.8rem; font-weight:600;
+  border:1px solid var(--rule);
+  background:var(--surface);
+  color:var(--ink-soft);
+  border-radius:20px;
+  padding:0.35rem 0.85rem;
+  cursor:pointer;
+}
+.speed-opt.active{
+  border-color:var(--red); color:var(--red); background:var(--red-tint);
+}
+.voice-note{
+  font-size:0.72rem; color:var(--ink-soft);
+  font-style:italic;
+  width:100%;
+}
+.clip{
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:1rem 1.1rem;
+  margin-bottom:1.25rem;
+}
+.clip-head{display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:0.8rem;}
+.play-btn{
+  display:flex; align-items:center; gap:0.5rem;
+  background:var(--ink); color:#fff;
+  border:none; border-radius:20px;
+  padding:0.5rem 1rem;
+  font-family:var(--font-body);
+  font-weight:600; font-size:0.85rem;
+  cursor:pointer;
+}
+.play-btn:disabled{opacity:0.4; cursor:not-allowed;}
+.plays-left{font-size:0.75rem; color:var(--ink-soft);}
+.transcript{
+  margin-top:0.6rem; font-size:0.88rem; color:var(--ink-soft);
+  border-top:1px dashed var(--rule); padding-top:0.6rem;
+}
+textarea{
+  width:100%;
+  min-height:180px;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:0.9rem 1rem;
+  font-family:var(--font-body);
+  font-size:0.98rem;
+  line-height:1.6;
+  color:var(--ink);
+  background:var(--surface);
+  resize:vertical;
+}
+textarea:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
+.wordcount{
+  display:flex; justify-content:space-between;
+  font-size:0.78rem; color:var(--ink-soft);
+  margin-top:0.5rem;
+}
+.prompt-box{
+  background:var(--surface-2);
+  border-left:3px solid var(--red);
+  padding:1rem 1.15rem;
+  margin:1rem 0 1.25rem;
+}
+.prompt-box .en{font-style:italic; margin-top:0.4rem;}
+/* results */
+.report-meta{
+  display:flex; flex-wrap:wrap; gap:0.35rem 1.1rem;
+  font-size:0.72rem; color:var(--ink-soft);
+  border-bottom:1px dashed var(--rule);
+  padding-bottom:0.75rem; margin-bottom:1rem;
+}
+.result-head{display:flex; align-items:baseline; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.25rem;}
+.cefr-badge{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:2.1rem;
+  color:var(--red);
+  line-height:1;
+}
+.ruler{margin:1.75rem 0 2rem;}
+.ruler-track{
+  position:relative;
+  display:flex;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  overflow:hidden;
+}
+.band{
+  flex:1;
+  text-align:center;
+  padding:0.55rem 0.2rem;
+  font-size:0.78rem;
+  font-weight:700;
+  color:var(--ink-soft);
+  background:var(--surface-2);
+  border-right:1px solid var(--rule);
+}
+.band:last-child{border-right:none;}
+.band.hit{background:var(--red-tint); color:var(--red);}
+.marker{
+  position:absolute;
+  top:-9px;
+  width:0; height:0;
+  border-left:7px solid transparent;
+  border-right:7px solid transparent;
+  border-top:9px solid var(--ink);
+  transform:translateX(-50%);
+  transition:left 0.5s ease;
+}
+.skill-bars{display:flex; flex-direction:column; gap:1.1rem; margin:1.5rem 0;}
+.skill-block{display:flex; flex-direction:column; gap:0.35rem;}
+.skill-row{display:grid; grid-template-columns:8rem 1fr 3rem; align-items:center; gap:0.75rem;}
+.skill-label{font-size:0.88rem; font-weight:600; display:flex; align-items:center; gap:0.4rem;}
+.skill-cefr{
+  font-family:var(--font-display); font-size:0.7rem; font-weight:700;
+  color:var(--red); border:1px solid var(--red); border-radius:4px; padding:0.05rem 0.35rem;
+}
+.skill-track{height:10px; background:var(--surface-2); border-radius:5px; overflow:hidden; border:1px solid var(--rule);}
+.skill-fill{height:100%; background:var(--red); border-radius:5px 0 0 5px;}
+.skill-pct{font-family:var(--font-display); font-weight:700; font-size:0.9rem; text-align:right;}
+.skill-cando{font-size:0.8rem; color:var(--ink-soft); line-height:1.5; padding-left:0.1rem;}
+.writing-note{
+  font-size:0.88rem; color:var(--ink-soft); line-height:1.6;
+  margin:0.75rem 0 1.5rem;
+  padding:0.15rem 0 0.15rem 0.9rem;
+  border-left:2px solid var(--rule);
+}
+.highlight-block{
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--red);
+  border-radius:10px;
+  padding:1.35rem 1.5rem 1.6rem;
+  margin:1.75rem 0;
+}
+.highlight-block .eyebrow{margin:0 0 0.4rem;}
+.highlight-block h3.display{font-size:1.2rem; margin:0 0 0.85rem;}
+.highlight-block .note-body{font-size:0.98rem; line-height:1.7;}
+.highlight-block ol{padding-left:1.3rem; margin:0;}
+.highlight-block li{margin-bottom:0.7rem; line-height:1.6; font-size:0.98rem;}
+.highlight-block li:last-child{margin-bottom:0;}
+.disclaimer{font-size:0.8rem; color:var(--ink-soft); margin-top:1.75rem; border-top:1px solid var(--rule); padding-top:1rem;}
+.result-actions{display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;}
+@media (max-width:520px){
+  .skill-row{grid-template-columns:6.2rem 1fr 2.6rem;}
+  .card{padding:1.35rem 1.15rem 1.6rem;}
+  .cefr-badge{font-size:1.7rem;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;}
+}
+.copy-overlay{
+  position:fixed; inset:0;
+  background:rgba(10,9,8,0.55);
+  display:flex; align-items:center; justify-content:center;
+  padding:1.25rem;
+  z-index:100;
+}
+.copy-modal{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:10px;
+  padding:1.25rem 1.35rem;
+  max-width:520px; width:100%;
+}
+.copy-modal p{font-size:0.9rem; margin:0 0 0.75rem;}
+.copy-modal textarea{
+  width:100%; min-height:160px;
+  border:1px solid var(--rule); border-radius:7px;
+  padding:0.75rem; font-family:'JetBrains Mono', monospace; font-size:0.8rem;
+  color:var(--ink); background:var(--surface-2);
+  resize:vertical;
+}
+.copy-modal .btn-row{margin-top:1rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div class="logo-mark" aria-hidden="true">AZ</div>
+    <div class="brand">
+      <p class="brand-eyebrow">AZEnglish</p>
+      <p class="brand-name">Kiểm tra trình độ nhanh · CEFR</p>
+    </div>
+    <div class="timer" id="timer">22:00</div>
+    <button type="button" class="theme-btn" id="themeBtn" title="Đổi giao diện sáng/tối">◐</button>
+  </header>
+
+  <div class="progress-rule" id="progressRule">
+    <div class="rule-fill" id="ruleFill"></div>
+    <div class="tick active" data-stage="routing">I <span>Khởi động</span></div>
+    <div class="tick" data-stage="reading">II <span>Đọc</span></div>
+    <div class="tick" data-stage="listening">III <span>Nghe</span></div>
+    <div class="tick" data-stage="writing">IV <span>Viết</span></div>
+    <div class="tick" data-stage="results">— <span>Kết quả</span></div>
+  </div>
+
+  <main id="stage-intro" class="card stage">
+    <p class="eyebrow">Placement test · 22 phút</p>
+    <h1 class="display">Bạn đang ở trình độ tiếng Anh nào?</h1>
+    <p class="lede">Bài kiểm tra gồm 3 phần: <strong>Đọc, Nghe</strong> và <strong>Viết</strong>. Làm lần lượt từng phần theo thứ tự — không quay lại phần trước được. Sau khi nộp bài, kết quả sẽ được quy đổi theo thang <strong>CEFR</strong> (thang trình độ tiếng Anh quốc tế, từ A1 đến C2 — cũng là thang các kỳ thi Cambridge sử dụng), kèm tư vấn lộ trình học từ AZEnglish.</p>
+    <p class="eyebrow" style="margin-top:1.25rem;">Hướng dẫn làm bài</p>
+    <ul class="plain muted">
+      <li><strong>Thời gian:</strong> 22 phút cho toàn bộ bài, tính từ lúc bạn bấm nút Bắt đầu. Đồng hồ đếm ngược ở góc trên bên phải màn hình.</li>
+      <li><strong>Phần Đọc và Nghe:</strong> mỗi câu có 4 đáp án, chọn 1 đáp án đúng nhất bằng cách bấm vào ô tương ứng.</li>
+      <li><strong>Phần Nghe:</strong> mỗi đoạn hội thoại được phát tối đa 2 lần — hãy dùng tai nghe hoặc bật loa đủ to trước khi bắt đầu.</li>
+      <li><strong>Phần Viết:</strong> viết đúng số câu được yêu cầu cho mỗi chủ đề, trong ô soạn thảo bên dưới đề bài.</li>
+      <li>Nếu không chắc đáp án nào đúng, hãy chọn đáp án bạn thấy hợp lý nhất rồi tiếp tục — đừng bỏ trống câu nào.</li>
+    </ul>
+    <h3 class="display" style="font-size:1rem; margin-top:1.5rem;">Đăng ký làm test</h3>
+    <p class="muted" style="margin-top:-0.4rem;">Để đội ngũ AZEnglish liên hệ gửi kết quả và tư vấn lộ trình sau khi bạn hoàn thành.</p>
+    <div class="reg-fields">
+      <div class="field">
+        <label for="regName">Họ tên</label>
+        <input type="text" id="regName" placeholder="Nguyễn Văn A" oninput="checkRegComplete()">
+      </div>
+      <div class="field">
+        <label for="regPhone">Số điện thoại / Zalo</label>
+        <input type="tel" id="regPhone" placeholder="09xxxxxxxx" oninput="checkRegComplete()">
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="startBtn" disabled onclick="startTest()">Đăng ký & Bắt đầu — 22:00</button>
+    </div>
+  </main>
+
+  <main id="stage-routing" class="card stage" hidden>
+    <p class="eyebrow">Phần I · Khởi động</p>
+    <h2 class="display">Đọc đoạn văn và nghe hội thoại bên dưới</h2>
+    <p class="muted">Trả lời các câu hỏi dựa trên đoạn văn và đoạn hội thoại bạn đọc/nghe được. Đây là phần khởi động trước khi vào bài Đọc và Nghe chính thức.</p>
+    <div id="routingPassage"></div>
+    <div id="routingReadingQuestions"></div>
+    <div class="speed-toggle" id="speedToggle">
+      <span class="speed-label">Tốc độ đọc (áp dụng cho mọi phần Nghe):</span>
+      <button type="button" class="speed-opt active" data-rate="0.95" onclick="setListeningRate(0.95, this)">Chuẩn — như thi thật</button>
+      <button type="button" class="speed-opt" data-rate="0.8" onclick="setListeningRate(0.8, this)">Chậm hơn — để luyện</button>
+      <span class="voice-note" id="voiceNote"></span>
+    </div>
+    <div id="routingListeningClips"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="routingNext" disabled onclick="onRoutingNext()">Tiếp tục</button>
+    </div>
+  </main>
+
+  <main id="stage-reading" class="card stage" hidden>
+    <p class="eyebrow" id="readingEyebrow">Phần II · Đọc hiểu</p>
+    <h2 class="display">Reading</h2>
+    <p class="muted" id="readingIntro">Đọc đoạn văn rồi trả lời các câu hỏi.</p>
+    <div id="readingPassage"></div>
+    <div id="readingQuestions"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="readingNext" disabled onclick="goTo('listening')">Tiếp tục — Nghe hiểu</button>
+    </div>
+  </main>
+
+  <main id="stage-listening" class="card stage" hidden>
+    <p class="eyebrow" id="listeningEyebrow">Phần III · Nghe hiểu</p>
+    <h2 class="display">Listening</h2>
+    <p class="muted">Bấm ▶ để nghe từng đoạn (tối đa 2 lần/đoạn), sau đó chọn đáp án đúng.</p>
+    <div id="listeningClips"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="listeningNext" disabled onclick="goTo('writing')">Tiếp tục — Viết</button>
+    </div>
+  </main>
+
+  <main id="stage-writing" class="card stage" hidden>
+    <p class="eyebrow">Phần IV · Viết</p>
+    <h2 class="display">Writing</h2>
+    <p class="muted">Viết 2 đoạn văn ngắn theo 2 đề bài bên dưới. Mỗi đoạn khoảng 3–5 câu, thời gian gợi ý khoảng 3 phút/đề.</p>
+
+    <h3 class="display" style="font-size:1rem; margin-top:1.25rem;">Chủ đề 1 — Giới thiệu bản thân</h3>
+    <div class="prompt-box">
+      <div>Viết đoạn văn ngắn (3–5 câu) bằng tiếng Anh: bạn là ai, bạn đang học/làm gì, và mục tiêu học tiếng Anh của bạn trong năm nay.</div>
+      <div class="en">"Write 3–5 sentences: who you are, what you study or do, and your English-learning goal this year."</div>
+    </div>
+    <textarea id="writingArea1" placeholder="Start writing here... (e.g. My name is ...)" oninput="updateWordCount(1)"></textarea>
+    <div class="wordcount"><span id="wcLabel1">0 từ</span><span>Gợi ý: 20–50 từ</span></div>
+
+    <h3 class="display" style="font-size:1rem; margin-top:1.75rem;">Chủ đề 2 — Nêu ý kiến</h3>
+    <div class="prompt-box">
+      <div>Viết 3–5 câu nêu ý kiến của bạn: Học ngoại ngữ online có hiệu quả bằng học trực tiếp không? Vì sao?</div>
+      <div class="en">"Write 3–5 sentences giving your opinion: Is learning a language online as effective as learning in person? Why or why not?"</div>
+    </div>
+    <textarea id="writingArea2" placeholder="Start writing here... (e.g. In my opinion, ...)" oninput="updateWordCount(2)"></textarea>
+    <div class="wordcount"><span id="wcLabel2">0 từ</span><span>Gợi ý: 20–50 từ</span></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="writingNext" onclick="finishTest(false)">Nộp bài — Xem kết quả</button>
+    </div>
+  </main>
+
+  <main id="stage-results" class="card stage" hidden>
+    <p class="eyebrow">Báo cáo kết quả</p>
+    <div class="report-meta" id="reportMeta"></div>
+    <div class="result-head">
+      <span class="cefr-badge" id="cefrBadge">—</span>
+      <h2 class="display" id="cefrTitle" style="margin:0;">—</h2>
+    </div>
+    <p class="muted" id="overallLine">—</p>
+
+    <div class="ruler">
+      <div class="ruler-track" id="rulerTrack">
+        <div class="band" data-band="A1">A1</div>
+        <div class="band" data-band="A2">A2</div>
+        <div class="band" data-band="B1">B1</div>
+        <div class="band" data-band="B2">B2</div>
+        <div class="band" data-band="C1">C1</div>
+        <div class="band" data-band="C2">C2</div>
+        <div class="marker" id="marker"></div>
+      </div>
+    </div>
+
+    <div class="skill-bars" id="skillBars"></div>
+
+    <div class="writing-note" id="writingNote"></div>
+
+    <div class="highlight-block">
+      <p class="eyebrow">Nhận xét</p>
+      <h3 class="display">Đánh giá từ bài test</h3>
+      <div class="note-body" id="expertNote"></div>
+    </div>
+
+    <div class="highlight-block">
+      <p class="eyebrow">Lộ trình đề xuất</p>
+      <h3 class="display">Lộ trình học từ AZEnglish</h3>
+      <ol id="roadmapList"></ol>
+    </div>
+
+    <div class="highlight-block">
+      <p class="eyebrow">Bài tập luyện tập</p>
+      <h3 class="display" id="exercisesTitle">Bài tập luyện tập gợi ý</h3>
+      <ol id="exercisesList"></ol>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn-primary" onclick="copySummary()">Sao chép kết quả để gửi tư vấn viên</button>
+      <button class="btn btn-ghost" onclick="copyExercises()">Sao chép bài tập luyện tập</button>
+      <button class="btn btn-ghost" onclick="location.reload()">Làm lại bài test</button>
+    </div>
+
+    <p class="disclaimer">Đây là bài tự đánh giá nhanh mang tính tham khảo (đặc biệt điểm Viết được chấm bằng thuật toán ước lượng, không phải giáo viên chấm trực tiếp), không thay thế bài thi xếp lớp chính thức hoặc chứng chỉ Cambridge English. Để có lộ trình chính xác hơn, hãy mang kết quả này đến buổi tư vấn 1:1 với giáo viên AZEnglish.</p>
+  </main>
+</div>
+
+<script>
+const ROUTING = {
+  reading: {
+    passages: ["Hi Minh, Thanks for your message. I have already booked the tickets for Saturday's football match, so you don't need to buy one. The game starts at 3 p.m., but let's meet at the stadium at 2:30 so we can find good seats. If it rains, the match will still happen because the stadium has a roof. See you soon! — Anna"],
+    questions: [
+      {q:"What has Anna already done?", options:["Bought the tickets","Cancelled the match","Found good seats","Called Minh"], correct:0},
+      {q:"What time should Minh arrive at the stadium?", options:["3:00","2:30","2:00","3:30"], correct:1},
+      {q:"Why will the match still happen if it rains?", options:["The players don't mind rain","The stadium has a roof","The match will be moved","It never rains there"], correct:1},
+      {q:"What does Anna suggest they do before the match?", options:["Buy food together","Meet early to find good seats","Watch it on television","Cancel their plan"], correct:1},
+      {q:"What day is the match?", options:["Friday","Saturday","Sunday","Monday"], correct:1},
+      {q:"Why doesn't Minh need to buy a ticket?", options:["The match is free","Anna already bought it","Minh already has one","Tickets are sold out"], correct:1}
+    ]
+  },
+  listening: {
+    clips: [
+      {text:"I've never been to Japan before, but I'm flying there next month for a work trip.", q:"What is true about the speaker?", options:["They live in Japan","They have never visited Japan before","They go to Japan every month","They are moving to Japan permanently"], correct:1},
+      {text:"The bus was late again this morning, so I missed the first ten minutes of my meeting.", q:"Why did the speaker miss part of the meeting?", options:["They forgot about it","The bus was late","The meeting was cancelled","They arrived early"], correct:1},
+      {text:"By the time we arrived at the cinema, the film had already started, so we missed the beginning.", q:"What had happened before they arrived at the cinema?", options:["They had bought tickets early","The film had already started","The cinema had closed","They had watched the whole film"], correct:1},
+      {text:"I'm really sorry, but I won't be able to make it to the meeting tomorrow. Something's come up at home.", q:"What is the speaker doing?", options:["Confirming they will attend","Apologising and cancelling","Asking to reschedule to today","Complaining about the meeting"], correct:1},
+      {text:"We've been waiting for the delivery since Monday, and it still hasn't arrived.", q:"What is true about the delivery?", options:["It arrived on Monday","It has not arrived yet","It was cancelled","It arrived early"], correct:1},
+      {text:"I'd love to come to the party, but I already have plans that evening.", q:"Can the speaker come to the party?", options:["Yes, happily","No, they already have other plans","They are not sure yet","They will come late"], correct:1},
+      {text:"The printer hasn't been working properly since last week; someone should really call IT.", q:"What is the problem?", options:["The printer is new","The printer hasn't been working properly","IT already fixed it","There is no printer"], correct:1}
+    ]
+  }
+};
+
+const BRANCHES = {
+  down: {
+    label: 'A1–A2', ceiling: 40,
+    reading: {
+      passages: [
+        "My name is Tom. I am a student. Every morning, I get up at seven o'clock. I have breakfast, and then I walk to school. My school is not far from my house. After school, I play football with my friends.",
+        "This is my classroom. It is big and clean. There are twenty desks and one board. We have English class every Monday and Wednesday."
+      ],
+      questions: [
+        {q:"What time does Tom get up?", options:["Six o'clock","Seven o'clock","Eight o'clock","Nine o'clock"], correct:1, weight:1},
+        {q:"What does Tom do after school?", options:["He does homework","He plays football","He watches TV","He goes shopping"], correct:1, weight:2},
+        {q:"Is Tom's school far from his house?", options:["Yes, very far","No, it is not far","He doesn't have a school","He takes a bus"], correct:1, weight:1},
+        {q:"How many desks are in the classroom?", options:["Ten","Fifteen","Twenty","Twenty-five"], correct:2, weight:1},
+        {q:"When do they have English class?", options:["Every day","Monday and Wednesday","Only on Friday","Every weekend"], correct:1, weight:1}
+      ]
+    },
+    listening: {
+      clips: [
+        {text:"Hi, my name is Laura. I'm from Canada, and I work as a nurse.", q:"Where is Laura from?", options:["Canada","the USA","the UK","Australia"], correct:0, weight:1},
+        {text:"Can I have a coffee and a sandwich, please? — Sure, that's five dollars.", q:"What does the customer order?", options:["Tea and a cake","Coffee and a sandwich","Juice and a sandwich","Coffee and a cake"], correct:1, weight:2},
+        {text:"This is my brother. His name is Peter. He is a taxi driver.", q:"What is Peter's job?", options:["Taxi driver","Nurse","Teacher","Student"], correct:0, weight:1},
+        {text:"It's my birthday today. My friends are coming to my house at six o'clock.", q:"What time are the friends coming?", options:["Five o'clock","Six o'clock","Seven o'clock","Eight o'clock"], correct:1, weight:1},
+        {text:"Do you want tea or coffee? — Tea, please, with a little milk.", q:"What does the person want in their tea?", options:["Sugar","Milk","Lemon","Nothing"], correct:1, weight:1}
+      ]
+    }
+  },
+  mid: {
+    label: 'A2–B1', ceiling: 65,
+    reading: {
+      passages: [
+        "Many people today learn new skills without ever entering a classroom. Online courses, mobile apps, and short videos let learners study at their own pace, in their own time. A 2023 survey of adult learners found that most preferred short lessons of fifteen to twenty minutes, repeated daily, over long weekend sessions. The reason was simple: short, regular practice builds a habit, while long sessions are easy to skip when life gets busy. Teachers who design self-study programmes now try to break big topics into small, daily tasks. For English learners, this might mean five minutes of listening, five minutes of vocabulary, and five minutes of writing — every single day.",
+        "Working from home has become common in many offices. Employees often say they save time because they don't have to travel, but some also admit they miss talking to colleagues in person. To solve this, several companies now ask staff to come to the office two or three days a week, hoping to combine flexibility with teamwork."
+      ],
+      questions: [
+        {q:"According to the text, what did most adult learners prefer?", options:["Long weekend sessions","Short daily lessons of 15–20 minutes","Classroom lessons","No fixed schedule"], correct:1, weight:1},
+        {q:"In the text, the word \"habit\" is closest in meaning to ___.", options:["a rule","a routine you repeat regularly","a mistake","a test"], correct:1, weight:2},
+        {q:"What can we infer teachers are now doing with self-study programmes?", options:["Making topics longer","Removing writing tasks","Breaking topics into small daily tasks","Replacing videos with books"], correct:2, weight:2},
+        {q:"What is the main idea of the first passage?", options:["Online courses are better than classrooms","Short, consistent daily practice helps learning stick","Surveys are unreliable","Fifteen minutes is too short to learn anything"], correct:1, weight:3},
+        {q:"According to the second passage, what is one advantage of working from home?", options:["Saving time on travel","More teamwork","Better pay","Fewer meetings"], correct:0, weight:2},
+        {q:"Why do some companies ask staff to come in a few days a week?", options:["To save money","To combine flexibility with teamwork","To reduce salaries","To end remote work completely"], correct:1, weight:2}
+      ]
+    },
+    listening: {
+      clips: [
+        {text:"Excuse me, could you tell me what time the museum closes? It closes at half past five, but the ticket office closes an hour earlier.", q:"What time does the ticket office close?", options:["4:30","5:30","6:30","5:00"], correct:0, weight:1},
+        {text:"I used to hate mornings, but since I started jogging before breakfast, I actually look forward to waking up early.", q:"What changed the speaker's feeling about mornings?", options:["A new job","Jogging before breakfast","Drinking coffee","Moving to a new city"], correct:1, weight:2},
+        {text:"My flight was delayed by two hours, so I had time to walk around the airport and buy a book.", q:"Why did the speaker walk around the airport?", options:["The flight was delayed","They missed the flight","They work at the airport","They like walking"], correct:0, weight:2},
+        {text:"I was going to walk to work, but it started raining, so I took the bus instead.", q:"Why did the speaker take the bus?", options:["The walk was too long","It started raining","The bus was faster","They missed the bus"], correct:1, weight:2},
+        {text:"Ever since I switched to a standing desk, my back has felt much better.", q:"What has improved since the change?", options:["The speaker's eyesight","The speaker's back","The speaker's typing speed","The speaker's salary"], correct:1, weight:2}
+      ]
+    }
+  },
+  up: {
+    label: 'B1–C1', ceiling: 100,
+    reading: {
+      passages: [
+        "Recent workplace research suggests that employees who are given more autonomy over their schedules tend to report higher job satisfaction, even when their overall workload remains unchanged. This does not necessarily mean that flexible hours suit everyone equally; some employees, particularly those early in their careers, often benefit from more structured guidance. Nevertheless, many companies that have shifted toward hybrid working models argue that the change has improved staff retention, despite initial concerns that productivity might suffer without close supervision. Whether this trend will continue once the labour market cools remains to be seen.",
+        "Critics of standardised testing argue that a single exam score can rarely capture the full range of a student's abilities, particularly for skills such as creativity or collaboration that are difficult to measure in a timed setting. Supporters counter that, whatever its flaws, standardised testing at least offers a consistent benchmark across different schools and regions — something that coursework and teacher assessments, however well-intentioned, often fail to guarantee."
+      ],
+      questions: [
+        {q:"According to the first passage, what is one benefit of flexible hours mentioned?", options:["Higher job satisfaction","Lower workload","Guaranteed promotions","Reduced working hours"], correct:0, weight:2},
+        {q:"Who might benefit less from flexible schedules, according to the first passage?", options:["Senior managers","Employees early in their careers","Employees who work remotely","Companies with hybrid models"], correct:1, weight:3},
+        {q:"What does the final sentence of the first passage suggest about the future of this trend?", options:["It is guaranteed to continue","It will definitely end soon","Its continuation is uncertain and depends on the job market","It has already ended"], correct:2, weight:3},
+        {q:"What tone does the writer take toward hybrid working models?", options:["Strongly against them","Cautiously balanced, acknowledging both benefits and uncertainty","Completely enthusiastic with no reservations","Indifferent and uninterested"], correct:1, weight:3},
+        {q:"According to critics (second passage), what is a weakness of standardised testing?", options:["It is too expensive","It cannot fully capture skills like creativity or collaboration","It takes too long to grade","It favours creative students"], correct:1, weight:2},
+        {q:"What argument do supporters of standardised testing make?", options:["It measures creativity well","It provides a consistent benchmark across schools","It replaces the need for teachers","It is always fair to every student"], correct:1, weight:3}
+      ]
+    },
+    listening: {
+      clips: [
+        {text:"Although the project was behind schedule, the manager decided not to cut any corners, insisting that quality mattered more than meeting the deadline.", q:"What does \"cut corners\" mean here?", options:["Reduce costs by lowering quality","Finish early","Increase the budget","Change the deadline officially"], correct:0, weight:3},
+        {text:"Despite repeated assurances from management that restructuring wouldn't affect frontline staff, morale has clearly taken a hit, with several long-serving employees quietly updating their CVs.", q:"What can be inferred about the employees' reaction to the restructuring?", options:["They are reassured by management","They are considering leaving despite what they were told","They have all resigned already","They support the restructuring fully"], correct:1, weight:3},
+        {text:"It's not that the proposal lacks merit; it's more that the timing couldn't be worse, given everything else on the board's plate right now.", q:"What is the speaker's main concern about the proposal?", options:["The proposal has no value","The timing is bad, not the idea itself","The board rejected it completely","The proposal was already approved"], correct:1, weight:3},
+        {text:"Granted, the merger will cut costs in the short term, but I'm not convinced it addresses the underlying problem with our supply chain.", q:"What is the speaker's overall view of the merger?", options:["Fully supportive, with no concerns","It may help costs, but doesn't fix the real issue","Completely against any cost-cutting","Certain it will fix the supply chain"], correct:1, weight:3},
+        {text:"I wouldn't go so far as to call it a failure, but it's fair to say the results fell short of what we'd hoped for.", q:"How does the speaker describe the results?", options:["A complete failure","Disappointing, though not a total failure","Better than expected","Impossible to judge"], correct:1, weight:3}
+      ]
+    }
+  }
+};
+
+let state = {
+  routingReadingAnswers: new Array(ROUTING.reading.questions.length).fill(null),
+  routingListeningAnswers: new Array(ROUTING.listening.clips.length).fill(null),
+  routingListeningPlays: new Array(ROUTING.listening.clips.length).fill(0),
+  routingReadingCorrect: 0,
+  routingListeningCorrect: 0,
+  readingBranch: null,
+  listeningBranch: null,
+  branchReadingAnswers: [],
+  branchListeningAnswers: [],
+  branchListeningPlays: [],
+  listeningRate: 0.95,
+  timeLeft: 1320,
+  timerId: null,
+  finished: false,
+  testId: null,
+  startedAt: null,
+  regName: '',
+  regPhone: '',
+  regDocId: null
+};
+
+(function initTheme(){
+  var saved = null;
+  try{ saved = localStorage.getItem('azPlacementTest_theme'); }catch(e){}
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var curEffective = cur || (sysDark ? 'dark' : 'light');
+    var next = curEffective === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('azPlacementTest_theme', next); }catch(e){}
+  });
+})();
+
+let chosenVoice = null;
+const VOICE_PREFERENCE = [
+  'Google UK English Female','Google UK English Male','Google US English',
+  'Microsoft Libby Online (Natural) - English (United Kingdom)','Microsoft Sonia Online (Natural) - English (United Kingdom)',
+  'Microsoft Ryan Online (Natural) - English (United Kingdom)','Microsoft Aria Online (Natural) - English (United States)',
+  'Microsoft Guy Online (Natural) - English (United States)',
+  'Daniel','Karen','Moira','Tessa','Fiona','Samantha','Alex'
+];
+function pickVoice(){
+  if(!('speechSynthesis' in window)) return;
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return;
+  let found = null;
+  for(const name of VOICE_PREFERENCE){
+    found = voices.find(v=>v.name===name);
+    if(found) break;
+  }
+  if(!found) found = voices.find(v=>v.lang==='en-GB') || voices.find(v=>v.lang && v.lang.indexOf('en')===0) || voices[0];
+  chosenVoice = found;
+  const note = document.getElementById('voiceNote');
+  if(note) note.textContent = chosenVoice ? ('Giọng đọc: '+chosenVoice.name) : '';
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  window.speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+function setListeningRate(rate, btn){
+  state.listeningRate = rate;
+  document.querySelectorAll('.speed-opt').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function formatTime(s){
+  const m = Math.floor(s/60);
+  const sec = s%60;
+  return m + ":" + (sec<10 ? "0"+sec : sec);
+}
+
+function tickTimer(){
+  state.timeLeft--;
+  const el = document.getElementById('timer');
+  el.textContent = formatTime(Math.max(state.timeLeft,0));
+  el.classList.toggle('warn', state.timeLeft<=120 && state.timeLeft>30);
+  el.classList.toggle('danger', state.timeLeft<=30);
+  if(state.timeLeft<=0){
+    clearInterval(state.timerId);
+    finishTest(true);
+  }
+}
+
+function checkRegComplete(){
+  const name = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  document.getElementById('startBtn').disabled = !(name.length >= 2 && phone.length >= 8);
+}
+
+async function getDb(){
+  try{
+    if(!window.claude || !window.claude.use) return null;
+    return await window.claude.use('db');
+  }catch(e){ return null; }
+}
+
+async function saveRegistration(){
+  const db = await getDb();
+  if(!db) return;
+  try{
+    const ref = await db.collection('registrations').add({
+      name: state.regName, phone: state.regPhone,
+      testId: state.testId, status: 'started',
+      startedAt: state.startedAt.toISOString()
+    });
+    state.regDocId = ref.id;
+  }catch(e){ /* best-effort: registration list is a bonus, never blocks the test */ }
+}
+
+async function saveResults(res){
+  const db = await getDb();
+  if(!db || !state.regDocId) return;
+  try{
+    await db.doc('registrations/'+state.regDocId).update({
+      status: 'completed',
+      cefr: res.cefr, overallPct: res.overallPct,
+      readingCefr: res.rCefr, listeningCefr: res.lCefr, writingCefr: res.wCefr,
+      readingPct: res.r.pct, listeningPct: res.l.pct, writingPct: res.w.pct,
+      finishedAt: res.finishedAt.toISOString(), elapsedSec: res.elapsedSec
+    });
+  }catch(e){ /* best-effort */ }
+}
+
+function startTest(){
+  state.regName = document.getElementById('regName').value.trim();
+  state.regPhone = document.getElementById('regPhone').value.trim();
+  state.testId = 'AZ-' + Date.now().toString(36).toUpperCase();
+  state.startedAt = new Date();
+  state.timerId = setInterval(tickTimer, 1000);
+  renderRouting();
+  goTo('routing');
+  saveRegistration();
+}
+
+function goTo(stageName){
+  const order = ['routing','reading','listening','writing','results'];
+  order.forEach(s=>{
+    document.getElementById('stage-'+s).hidden = (s!==stageName);
+  });
+  document.getElementById('stage-intro').hidden = true;
+  document.querySelectorAll('.tick').forEach(t=>{
+    const s = t.dataset.stage;
+    t.classList.toggle('active', s===stageName);
+    t.classList.toggle('done', order.indexOf(s) < order.indexOf(stageName));
+  });
+  const pct = (order.indexOf(stageName)/(order.length-1))*100;
+  document.getElementById('ruleFill').style.width = pct+'%';
+}
+
+function optionButtons(items, i, onclickName){
+  const letters = ['A','B','C','D'];
+  return '<div class="opts">' + items[i].options.map((opt,j)=>
+    '<button type="button" class="opt" onclick="'+onclickName+'('+i+','+j+')"><span class="opt-letter">'+letters[j]+'</span><span>'+opt+'</span></button>'
+  ).join('') + '</div>';
+}
+
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  if(!chosenVoice) pickVoice();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = chosenVoice ? chosenVoice.lang : 'en-GB';
+  if(chosenVoice) utter.voice = chosenVoice;
+  utter.rate = state.listeningRate;
+  utter.pitch = 1;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+}
+
+// ---- Routing stage (5 items at A2.2, decides which branch to use next) ----
+
+function renderRouting(){
+  document.getElementById('routingPassage').innerHTML = ROUTING.reading.passages.map(p=>'<div class="passage">'+p+'</div>').join('');
+  const rWrap = document.getElementById('routingReadingQuestions');
+  rWrap.innerHTML = ROUTING.reading.questions.map((q,i)=>
+    '<div class="q-block"><div class="q-text"><span class="q-num">Q'+(i+1)+'</span>'+q.q+'</div>' + optionButtons(ROUTING.reading.questions, i, 'selectRoutingReading') + '</div>'
+  ).join('');
+
+  const supportsTTS = 'speechSynthesis' in window;
+  const lWrap = document.getElementById('routingListeningClips');
+  lWrap.innerHTML = ROUTING.listening.clips.map((c,i)=>
+    '<div class="clip">' +
+      '<div class="clip-head">' +
+        '<button type="button" class="play-btn" id="rplay-'+i+'" onclick="playRoutingClip('+i+')">&#9658; Nghe đoạn '+(i+1)+'</button>' +
+        '<span class="plays-left" id="rplays-'+i+'">còn 2 lượt nghe</span>' +
+      '</div>' +
+      '<div class="q-text">'+c.q+'</div>' +
+      optionButtons(ROUTING.listening.clips, i, 'selectRoutingListening') +
+      (supportsTTS ? '' : '<div class="transcript">Trình duyệt của bạn không hỗ trợ giọng đọc — đây là transcript: "'+c.text+'"</div>') +
+    '</div>'
+  ).join('');
+}
+
+function selectRoutingReading(i,j){
+  state.routingReadingAnswers[i] = j;
+  document.querySelectorAll('#routingReadingQuestions .q-block')[i].querySelectorAll('.opt').forEach((b,k)=>b.classList.toggle('selected', k===j));
+  checkRoutingComplete();
+}
+
+function playRoutingClip(i){
+  if(state.routingListeningPlays[i] >= 2) return;
+  speak(ROUTING.listening.clips[i].text);
+  state.routingListeningPlays[i]++;
+  document.getElementById('rplays-'+i).textContent = 'còn '+(2-state.routingListeningPlays[i])+' lượt nghe';
+  if(state.routingListeningPlays[i] >= 2) document.getElementById('rplay-'+i).disabled = true;
+}
+
+function selectRoutingListening(i,j){
+  state.routingListeningAnswers[i] = j;
+  document.querySelectorAll('#routingListeningClips .clip')[i].querySelectorAll('.opt').forEach((b,k)=>b.classList.toggle('selected', k===j));
+  checkRoutingComplete();
+}
+
+function checkRoutingComplete(){
+  const done = state.routingReadingAnswers.every(a=>a!==null) && state.routingListeningAnswers.every(a=>a!==null);
+  document.getElementById('routingNext').disabled = !done;
+}
+
+function pickBranch(correct, total){
+  if(correct >= total) return 'up';
+  if(correct <= Math.floor(total/3)) return 'down';
+  return 'mid';
+}
+
+function onRoutingNext(){
+  let readingCorrect = 0, listeningCorrect = 0;
+  ROUTING.reading.questions.forEach((q,i)=>{ if(state.routingReadingAnswers[i]===q.correct) readingCorrect++; });
+  ROUTING.listening.clips.forEach((c,i)=>{ if(state.routingListeningAnswers[i]===c.correct) listeningCorrect++; });
+  state.routingReadingCorrect = readingCorrect;
+  state.routingListeningCorrect = listeningCorrect;
+  state.readingBranch = pickBranch(readingCorrect, ROUTING.reading.questions.length);
+  state.listeningBranch = pickBranch(listeningCorrect, ROUTING.listening.clips.length);
+
+  const rBranch = BRANCHES[state.readingBranch];
+  const lBranch = BRANCHES[state.listeningBranch];
+  state.branchReadingAnswers = new Array(rBranch.reading.questions.length).fill(null);
+  state.branchListeningAnswers = new Array(lBranch.listening.clips.length).fill(null);
+  state.branchListeningPlays = new Array(lBranch.listening.clips.length).fill(0);
+
+  renderReading();
+  renderListening();
+  goTo('reading');
+}
+
+// ---- Branch-specific Reading / Listening (chosen after routing) ----
+
+function renderReading(){
+  const branch = BRANCHES[state.readingBranch];
+  document.getElementById('readingEyebrow').textContent = 'Phần II · Đọc';
+  document.getElementById('readingPassage').innerHTML = branch.reading.passages.map(p=>'<div class="passage">'+p+'</div>').join('');
+  const wrap = document.getElementById('readingQuestions');
+  wrap.innerHTML = branch.reading.questions.map((q,i)=>
+    '<div class="q-block"><div class="q-text"><span class="q-num">Q'+(i+1)+'</span>'+q.q+'</div>' + optionButtons(branch.reading.questions, i, 'selectReading') + '</div>'
+  ).join('');
+  document.getElementById('readingNext').disabled = true;
+}
+
+function selectReading(i,j){
+  state.branchReadingAnswers[i] = j;
+  document.querySelectorAll('#readingQuestions .q-block')[i].querySelectorAll('.opt').forEach((b,k)=>{
+    b.classList.toggle('selected', k===j);
+  });
+  document.getElementById('readingNext').disabled = state.branchReadingAnswers.some(a=>a===null);
+}
+
+function renderListening(){
+  const branch = BRANCHES[state.listeningBranch];
+  document.getElementById('listeningEyebrow').textContent = 'Phần III · Nghe';
+  const wrap = document.getElementById('listeningClips');
+  const supportsTTS = 'speechSynthesis' in window;
+  wrap.innerHTML = branch.listening.clips.map((c,i)=>
+    '<div class="clip">' +
+      '<div class="clip-head">' +
+        '<button type="button" class="play-btn" id="play-'+i+'" onclick="playClip('+i+')">&#9658; Nghe đoạn '+(i+1)+'</button>' +
+        '<span class="plays-left" id="plays-'+i+'">còn 2 lượt nghe</span>' +
+      '</div>' +
+      '<div class="q-text">'+c.q+'</div>' +
+      optionButtons(branch.listening.clips, i, 'selectListening') +
+      (supportsTTS ? '' : '<div class="transcript">Trình duyệt của bạn không hỗ trợ giọng đọc — đây là transcript: "'+c.text+'"</div>') +
+    '</div>'
+  ).join('');
+  document.getElementById('listeningNext').disabled = true;
+}
+
+function playClip(i){
+  if(state.branchListeningPlays[i] >= 2) return;
+  speak(BRANCHES[state.listeningBranch].listening.clips[i].text);
+  state.branchListeningPlays[i]++;
+  document.getElementById('plays-'+i).textContent = 'còn '+(2-state.branchListeningPlays[i])+' lượt nghe';
+  if(state.branchListeningPlays[i] >= 2) document.getElementById('play-'+i).disabled = true;
+}
+
+function selectListening(i,j){
+  state.branchListeningAnswers[i] = j;
+  const clipDiv = document.querySelectorAll('#listeningClips .clip')[i];
+  clipDiv.querySelectorAll('.opt').forEach((b,k)=>{
+    b.classList.toggle('selected', k===j);
+  });
+  document.getElementById('listeningNext').disabled = state.branchListeningAnswers.some(a=>a===null);
+}
+
+function updateWordCount(n){
+  const text = document.getElementById('writingArea'+n).value.trim();
+  const words = text.length ? text.split(/\s+/).filter(Boolean) : [];
+  document.getElementById('wcLabel'+n).textContent = words.length + ' từ';
+}
+
+function scoreReading(){
+  const branch = BRANCHES[state.readingBranch];
+  let earned=0, max=0;
+  branch.reading.questions.forEach((q,i)=>{
+    max += q.weight;
+    if(state.branchReadingAnswers[i] === q.correct) earned += q.weight;
+  });
+  const pct = Math.round((earned/max) * branch.ceiling);
+  return {earned, max, pct};
+}
+
+function scoreListening(){
+  const branch = BRANCHES[state.listeningBranch];
+  let earned=0, max=0;
+  branch.listening.clips.forEach((c,i)=>{
+    max += c.weight;
+    if(state.branchListeningAnswers[i] === c.correct) earned += c.weight;
+  });
+  const pct = Math.round((earned/max) * branch.ceiling);
+  return {earned, max, pct};
+}
+
+function scoreWriting(rawText){
+  const trimmed = (rawText||'').trim();
+  const words = trimmed.length ? trimmed.split(/\s+/).filter(Boolean) : [];
+  const wordCount = words.length;
+  if(wordCount < 5) return {pct:0, words:wordCount, sentenceCount:0, connectorHits:0, complexHits:0};
+  const sentences = trimmed.split(/[.!?]+/).map(s=>s.trim()).filter(Boolean);
+  const sentenceCount = Math.max(sentences.length,1);
+  const lower = words.map(w=>w.toLowerCase().replace(/[^a-z']/g,'')).filter(Boolean);
+  const uniqueRatio = new Set(lower).size / Math.max(lower.length,1);
+  const connectors = ['because','but','however','although','so','which','that','when','if','after','before','since','while','also','therefore'];
+  let connectorHits = 0;
+  connectors.forEach(c=>{
+    const re = new RegExp('\\b'+c+'\\b','gi');
+    const m = trimmed.match(re);
+    if(m) connectorHits += m.length;
+  });
+  const complexWords = ['because','although','if','when','which','that','while','since'];
+  let complexHits = 0;
+  complexWords.forEach(c=>{
+    const re = new RegExp('\\b'+c+'\\b','gi');
+    const m = trimmed.match(re);
+    if(m) complexHits += m.length;
+  });
+  let lengthScore;
+  if(wordCount < 8) lengthScore = 10;
+  else if(wordCount < 15) lengthScore = 40;
+  else if(wordCount < 20) lengthScore = 65;
+  else if(wordCount <= 50) lengthScore = 100;
+  else if(wordCount <= 70) lengthScore = 90;
+  else lengthScore = 75;
+  const varietyScore = Math.min(uniqueRatio*140, 100);
+  const connectorScore = Math.min(connectorHits*18, 100);
+  const complexScore = Math.min(complexHits*22, 100);
+  const sentenceScore = sentenceCount >= 3 ? 100 : sentenceCount*30;
+  const pct = Math.round(lengthScore*0.30 + varietyScore*0.20 + connectorScore*0.20 + complexScore*0.15 + sentenceScore*0.15);
+  return {
+    pct: Math.max(0, Math.min(100, pct)),
+    words: wordCount, sentenceCount, connectorHits, complexHits
+  };
+}
+
+function cefrFromPct(pct){
+  if(pct < 20) return 'A1';
+  if(pct < 40) return 'A2';
+  if(pct < 60) return 'B1';
+  if(pct < 75) return 'B2';
+  if(pct < 90) return 'C1';
+  return 'C2';
+}
+
+const CEFR_CANDO = {
+  reading: {
+    A1:'Hiểu được từ, cụm từ và biển báo quen thuộc, đơn giản.',
+    A2:'Hiểu văn bản ngắn về chủ đề quen thuộc như thư từ, quảng cáo, thực đơn.',
+    B1:'Nắm được ý chính của văn bản rõ ràng về công việc, học tập, đời sống thường ngày.',
+    B2:'Đọc hiểu bài viết có lập luận, nhận ra quan điểm và thái độ của người viết.',
+    C1:'Hiểu văn bản dài, phức tạp kể cả khi chủ đề không thuộc lĩnh vực quen thuộc.',
+    C2:'Đọc hiểu hầu hết mọi loại văn bản, kể cả trừu tượng hoặc mang tính văn học.'
+  },
+  listening: {
+    A1:'Hiểu từ, cụm từ quen thuộc khi người nói chậm và rõ ràng.',
+    A2:'Hiểu ý chính trong hội thoại ngắn, đơn giản về nhu cầu hàng ngày.',
+    B1:'Hiểu ý chính khi nghe rõ ràng về chủ đề quen thuộc (công việc, trường học, giải trí).',
+    B2:'Hiểu bài nói dài, tin tức, bài giảng có cấu trúc khi chủ đề tương đối quen thuộc.',
+    C1:'Hiểu bài nói dài dù cấu trúc không rõ ràng, kể cả khi có thành ngữ, giọng vùng miền.',
+    C2:'Hiểu mọi ngôn ngữ nói, kể cả khi tốc độ nhanh và có phương ngữ đậm.'
+  },
+  writing: {
+    A1:'Viết được câu, cụm từ đơn giản (giới thiệu bản thân, địa chỉ).',
+    A2:'Viết đoạn ngắn về chủ đề quen thuộc, thư từ cá nhân đơn giản.',
+    B1:'Viết đoạn văn liên kết về chủ đề quen thuộc hoặc quan tâm cá nhân.',
+    B2:'Viết văn bản rõ ràng, chi tiết, trình bày và bảo vệ quan điểm có lập luận.',
+    C1:'Viết văn bản rõ ràng, có cấu trúc tốt về các chủ đề phức tạp.',
+    C2:'Viết trôi chảy, đúng phong cách ngữ cảnh, cấu trúc logic chặt chẽ.'
+  }
+};
+
+const CEFR_INFO = {
+  A1: {title:'A1 — Mới bắt đầu', cambridge:'Cambridge: Starters/Movers (trẻ em) hoặc bước đệm trước A2 Key', track:'Giao tiếp Nền tảng (Foundation)'},
+  A2: {title:'A2 — Sơ cấp', cambridge:'Cambridge: A2 Key (KET)', track:'Giao tiếp Sơ cấp / TOEIC Starter'},
+  B1: {title:'B1 — Trung cấp', cambridge:'Cambridge: B1 Preliminary (PET)', track:'Giao tiếp Trung cấp / IELTS Foundation (mục tiêu 4.0–5.0) / TOEIC 450–650'},
+  B2: {title:'B2 — Trung cao cấp', cambridge:'Cambridge: B2 First (FCE)', track:'IELTS Intermediate (mục tiêu 5.5–6.5) / TOEIC 650–850'},
+  C1: {title:'C1 — Nâng cao', cambridge:'Cambridge: C1 Advanced (CAE)', track:'IELTS Advanced (mục tiêu 6.5–7.5)'},
+  C2: {title:'C2 — Thành thạo', cambridge:'Cambridge: C2 Proficiency (CPE)', track:'IELTS Cấp tốc Nâng cao (mục tiêu 8.0+) / luyện chuyên sâu học thuật'}
+};
+
+const EXERCISES = {
+  'Đọc': [
+    'Mỗi ngày đọc 1 bài ngắn trên BBC Learning English hoặc VOA Learning English, gạch chân 5 từ mới.',
+    'Sau khi đọc, tóm tắt lại nội dung bằng 2–3 câu tiếng Anh của riêng bạn (không chép lại nguyên văn).',
+    'Tự đặt 3 câu hỏi cho đoạn vừa đọc (1 câu hỏi chi tiết, 1 câu hỏi suy luận, 1 câu hỏi ý chính) rồi tự trả lời.',
+    'Đọc lại đoạn văn trong bài test này và liệt kê mọi từ nối (because, although, however...) bạn tìm thấy — học cách dùng lại chúng.'
+  ],
+  'Nghe': [
+    'Nghe 1 đoạn hội thoại hoặc video ngắn 2 lần: lần 1 không phụ đề, lần 2 có phụ đề — ghi lại phần bạn nghe sai.',
+    'Luyện chép chính tả (dictation): nghe 1 câu, dừng lại, viết ra chính xác từng từ, rồi kiểm tra lại.',
+    'Luyện shadowing: nghe 1 câu ngắn rồi nhại lại ngay lập tức, lặp lại 5 lần để quen ngữ điệu.',
+    'Nghe lại các đoạn trong bài test này (không giới hạn số lần) và đối chiếu với phần transcript hiện khi trình duyệt không hỗ trợ giọng đọc.'
+  ],
+  'Viết': [
+    'Viết nhật ký 4–6 câu mỗi ngày bằng tiếng Anh, chủ động dùng ít nhất 1 liên từ (because, although, when...).',
+    'Viết lại chủ đề 2 (nêu ý kiến) trong bài test này dài hơn, thêm 1–2 ví dụ cụ thể để bảo vệ quan điểm.',
+    'Nhờ một người biết tiếng Anh (bạn học, giáo viên) đọc và sửa lỗi ngữ pháp cho 1 đoạn bạn mới viết.',
+    'Tập viết lại một câu theo 2 cách diễn đạt khác nhau để mở rộng vốn từ và cấu trúc câu.'
+  ]
+};
+
+let lastResult = null;
+
+function combineWriting(w1, w2){
+  return {
+    pct: Math.round((w1.pct + w2.pct) / 2),
+    words: w1.words + w2.words,
+    words1: w1.words, words2: w2.words
+  };
+}
+
+function finishTest(auto){
+  if(state.finished) return;
+  state.finished = true;
+  clearInterval(state.timerId);
+  const writingText1 = document.getElementById('writingArea1').value;
+  const writingText2 = document.getElementById('writingArea2').value;
+  const r = scoreReading();
+  const l = scoreListening();
+  const w = combineWriting(scoreWriting(writingText1), scoreWriting(writingText2));
+  const overallPct = Math.round((r.pct + l.pct + w.pct)/3);
+  const cefr = cefrFromPct(overallPct);
+  const elapsedSec = 1320 - Math.max(state.timeLeft, 0);
+  lastResult = {
+    r, l, w, overallPct, cefr, auto,
+    rCefr: cefrFromPct(r.pct), lCefr: cefrFromPct(l.pct), wCefr: cefrFromPct(w.pct),
+    testId: state.testId, elapsedSec, finishedAt: new Date(),
+    routingReadingCorrect: state.routingReadingCorrect, routingListeningCorrect: state.routingListeningCorrect,
+    readingBranch: state.readingBranch, listeningBranch: state.listeningBranch,
+    readingBranchLabel: BRANCHES[state.readingBranch].label, listeningBranchLabel: BRANCHES[state.listeningBranch].label
+  };
+  renderResults(lastResult);
+  goTo('results');
+  saveResults(lastResult);
+}
+
+function renderResults(res){
+  const info = CEFR_INFO[res.cefr];
+  document.getElementById('cefrBadge').textContent = res.cefr;
+  document.getElementById('cefrTitle').textContent = info.title;
+
+  const dateStr = res.finishedAt.toLocaleDateString('vi-VN');
+  const timeUsed = formatTime(res.elapsedSec) + ' / 22:00';
+  document.getElementById('reportMeta').innerHTML =
+    '<span>Mã bài: <strong>'+res.testId+'</strong></span>' +
+    '<span>Ngày làm bài: '+dateStr+'</span>' +
+    '<span>Thời gian sử dụng: '+timeUsed+'</span>';
+
+  document.getElementById('overallLine').textContent =
+    (res.auto ? 'Hết giờ — kết quả tính trên phần bạn đã hoàn thành. ' : '') +
+    'Điểm tổng hợp ước tính: ' + res.overallPct + '/100 · ' + info.cambridge + '.';
+
+  document.querySelectorAll('.band').forEach(b=>{
+    b.classList.toggle('hit', b.dataset.band === res.cefr);
+  });
+  document.getElementById('marker').style.left = res.overallPct + '%';
+
+  const bars = document.getElementById('skillBars');
+  const rows = [
+    {label:'Đọc', pct: res.r.pct, cefr: res.rCefr, cando: CEFR_CANDO.reading[res.rCefr]},
+    {label:'Nghe', pct: res.l.pct, cefr: res.lCefr, cando: CEFR_CANDO.listening[res.lCefr]},
+    {label:'Viết', pct: res.w.pct, cefr: res.wCefr, cando: CEFR_CANDO.writing[res.wCefr]}
+  ];
+  bars.innerHTML = rows.map(row =>
+    '<div class="skill-block">' +
+      '<div class="skill-row">' +
+        '<div class="skill-label">'+row.label+' <span class="skill-cefr">'+row.cefr+'</span></div>' +
+        '<div class="skill-track"><div class="skill-fill" style="width:'+row.pct+'%;"></div></div>' +
+        '<div class="skill-pct">'+row.pct+'</div>' +
+      '</div>' +
+      '<div class="skill-cando">'+row.cando+'</div>' +
+    '</div>'
+  ).join('');
+
+  document.getElementById('writingNote').innerHTML =
+    (res.w.words < 5
+      ? 'Bạn chưa viết đủ nội dung ở phần Viết nên hệ thống không thể ước tính điểm — không có điểm nào được tính cho phần này.'
+      : 'Điểm Viết ở trên chỉ là <strong>ước tính sơ bộ</strong> dựa trên độ dài và cấu trúc câu bạn viết, không đánh giá được ngữ pháp hay ý tưởng như một giáo viên thật.') +
+    ' Đội ngũ chuyên môn AZEnglish sẽ xem trực tiếp bài Viết của bạn và <strong>liên hệ lại</strong> để tư vấn chính xác hơn.';
+
+  const skills = [
+    {name:'Đọc', pct:res.r.pct},
+    {name:'Nghe', pct:res.l.pct},
+    {name:'Viết', pct:res.w.pct}
+  ];
+  skills.sort((a,b)=>a.pct-b.pct);
+  const weakest = skills[0];
+  const strongest = skills[skills.length-1];
+
+  const tips = {
+    'Đọc':'đọc thêm mỗi ngày 1 đoạn ngắn (email, tin tức đơn giản) và tự đặt câu hỏi ý chính / chi tiết / suy luận cho chính đoạn đó',
+    'Nghe':'nghe lại các đoạn hội thoại ngắn 1–2 lần, vừa nghe vừa chép lại từ khoá, sau đó đối chiếu transcript',
+    'Viết':'viết nhật ký 4–6 câu mỗi ngày bằng tiếng Anh và chủ động dùng thêm liên từ (because, although, when...) để câu phức tạp hơn'
+  };
+
+  const note = document.getElementById('expertNote');
+  note.innerHTML =
+    '<strong>Theo kết quả bài test:</strong> xét trên cả 3 kỹ năng, bạn tương đương bậc <strong>'+res.cefr+'</strong> — trong đó Đọc ở mức <strong>'+res.rCefr+'</strong>, Nghe ở mức <strong>'+res.lCefr+'</strong> và Viết ở mức <strong>'+res.wCefr+'</strong>. '+
+    'Kỹ năng có điểm cao nhất là <strong>'+strongest.name+'</strong> ('+strongest.pct+'/100), trong khi <strong>'+weakest.name+'</strong> ('+weakest.pct+'/100) đang là điểm số thấp nhất — hướng cải thiện tham khảo: '+tips[weakest.name]+'. '+
+    '<br><br>Theo ước tính phổ biến trong đào tạo Anh ngữ, người học trung bình cần khoảng <strong>200 giờ học có hướng dẫn</strong> để tiến 1 bậc CEFR — với lịch học đều đặn 3 buổi/tuần, đó là khoảng <strong>6–9 tháng</strong> để đi từ '+res.cefr+' lên bậc kế tiếp. '+
+    '<br><br>Số liệu trên do bài test tự động tính ra; để có lộ trình chính xác nhất, hãy mang kết quả này trao đổi trực tiếp với giáo viên AZEnglish.';
+
+  const roadmap = document.getElementById('roadmapList');
+  roadmap.innerHTML =
+    '<li>Xác nhận bậc <strong>'+res.cefr+'</strong> bằng buổi test đầu vào trực tiếp cùng giáo viên AZEnglish (bài online này chỉ mang tính sàng lọc nhanh).</li>' +
+    '<li>Vào lộ trình <strong>'+info.track+'</strong>, tập trung củng cố kỹ năng '+weakest.name.toLowerCase()+' song song với 2 kỹ năng còn lại.</li>' +
+    '<li>Đặt mốc đánh giá lại sau 8–10 tuần để đo tiến độ trước khi lên bậc tiếp theo.</li>';
+
+  res.weakestSkill = weakest.name;
+  document.getElementById('exercisesTitle').textContent = 'Bài tập luyện tập gợi ý — ưu tiên ' + weakest.name;
+  document.getElementById('exercisesList').innerHTML =
+    EXERCISES[weakest.name].map(ex => '<li>'+ex+'</li>').join('');
+}
+
+function flashCopied(btn){
+  if(!btn) return;
+  const old = btn.textContent;
+  btn.textContent = 'Đã sao chép!';
+  setTimeout(()=>{ btn.textContent = old; }, 1800);
+}
+
+function showCopyFallback(text){
+  const overlay = document.createElement('div');
+  overlay.className = 'copy-overlay';
+  overlay.innerHTML =
+    '<div class="copy-modal">' +
+      '<p>Trình duyệt không cho sao chép tự động. Bấm vào ô bên dưới, chọn hết rồi tự sao chép (Ctrl+C hoặc Cmd+C):</p>' +
+      '<textarea readonly id="copyFallbackArea"></textarea>' +
+      '<div class="btn-row"><button type="button" class="btn btn-ghost" id="closeCopyOverlay">Đóng</button></div>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  const ta = document.getElementById('copyFallbackArea');
+  ta.value = text;
+  ta.focus();
+  ta.select();
+  document.getElementById('closeCopyOverlay').onclick = ()=> overlay.remove();
+  overlay.onclick = (e)=>{ if(e.target === overlay) overlay.remove(); };
+}
+
+function copyToClipboard(text, btn){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(
+      ()=> flashCopied(btn),
+      ()=> showCopyFallback(text)
+    );
+  } else {
+    showCopyFallback(text);
+  }
+}
+
+function copyExercises(){
+  if(!lastResult) return;
+  const skill = lastResult.weakestSkill;
+  const text = 'Bài tập luyện tập gợi ý (AZEnglish) — ưu tiên ' + skill + '\n' +
+    EXERCISES[skill].map((ex,i)=>(i+1)+'. '+ex).join('\n');
+  copyToClipboard(text, event.target);
+}
+
+function copySummary(){
+  if(!lastResult) return;
+  const r = lastResult;
+  const info = CEFR_INFO[r.cefr];
+  const text = 'AZEnglish Placement Test — Mã bài: ' + r.testId + '\n' +
+    'Học viên: ' + (state.regName || '(chưa nhập tên)') + ' · SĐT/Zalo: ' + (state.regPhone || '(chưa nhập số)') + '\n' +
+    'Ngày làm bài: ' + r.finishedAt.toLocaleDateString('vi-VN') + ' · Thời gian dùng: ' + formatTime(r.elapsedSec) + '/22:00\n' +
+    'Định vị Đọc: ' + r.routingReadingCorrect + '/6 → bộ câu ' + r.readingBranchLabel + ' · Định vị Nghe: ' + r.routingListeningCorrect + '/7 → bộ câu ' + r.listeningBranchLabel + '\n' +
+    'Bậc CEFR tổng hợp: ' + r.cefr + ' — ' + info.title + ' (' + r.overallPct + '/100)\n' +
+    'Đọc: ' + r.rCefr + ' — ' + r.r.pct + '/100 (' + r.r.earned + '/' + r.r.max + ' điểm)\n' +
+    'Nghe: ' + r.lCefr + ' — ' + r.l.pct + '/100 (' + r.l.earned + '/' + r.l.max + ' điểm)\n' +
+    'Viết: ' + r.wCefr + ' — ' + r.w.pct + '/100 ước tính sơ bộ (chủ đề 1: ' + r.w.words1 + ' từ, chủ đề 2: ' + r.w.words2 + ' từ) — cần giáo viên xem trực tiếp để đánh giá chính xác\n' +
+    'Gợi ý lộ trình: ' + info.track;
+  copyToClipboard(text, event.target);
+}
+</script>
+</body>
+</html>
