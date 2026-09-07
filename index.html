@@ -495,7 +495,7 @@ textarea:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
     <ul class="plain muted">
       <li><strong>Thời gian:</strong> 22 phút cho toàn bộ bài, tính từ lúc bạn bấm nút Bắt đầu. Đồng hồ đếm ngược ở góc trên bên phải màn hình.</li>
       <li><strong>Phần Đọc và Nghe:</strong> mỗi câu có 4 đáp án, chọn 1 đáp án đúng nhất bằng cách bấm vào ô tương ứng.</li>
-      <li><strong>Phần Nghe:</strong> mỗi đoạn hội thoại được phát tối đa 2 lần — hãy dùng tai nghe hoặc bật loa đủ to trước khi bắt đầu.</li>
+      <li><strong>Phần Nghe:</strong> mỗi đoạn hội thoại được phát tối đa 3 lần — hãy dùng tai nghe hoặc bật loa đủ to trước khi bắt đầu.</li>
       <li><strong>Phần Viết:</strong> viết đúng số câu được yêu cầu cho mỗi chủ đề, trong ô soạn thảo bên dưới đề bài.</li>
       <li>Nếu không chắc đáp án nào đúng, hãy chọn đáp án bạn thấy hợp lý nhất rồi tiếp tục — đừng bỏ trống câu nào.</li>
     </ul>
@@ -524,7 +524,7 @@ textarea:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
     <div id="routingReadingQuestions"></div>
     <div class="speed-toggle" id="speedToggle">
       <span class="speed-label">Tốc độ đọc (áp dụng cho mọi phần Nghe):</span>
-      <button type="button" class="speed-opt active" data-rate="0.95" onclick="setListeningRate(0.95, this)">Chuẩn — như thi thật</button>
+      <button type="button" class="speed-opt active" data-rate="0.9" onclick="setListeningRate(0.9, this)">Chuẩn — như thi thật</button>
       <button type="button" class="speed-opt" data-rate="0.8" onclick="setListeningRate(0.8, this)">Chậm hơn — để luyện</button>
       <span class="voice-note" id="voiceNote"></span>
     </div>
@@ -548,7 +548,7 @@ textarea:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
   <main id="stage-listening" class="card stage" hidden>
     <p class="eyebrow" id="listeningEyebrow">Phần III · Nghe hiểu</p>
     <h2 class="display">Listening</h2>
-    <p class="muted">Bấm ▶ để nghe từng đoạn (tối đa 2 lần/đoạn), sau đó chọn đáp án đúng.</p>
+    <p class="muted">Bấm ▶ để nghe từng đoạn (tối đa 3 lần/đoạn), sau đó chọn đáp án đúng.</p>
     <div id="listeningClips"></div>
     <div class="btn-row">
       <button class="btn btn-primary" id="listeningNext" disabled onclick="goTo('writing')">Tiếp tục — Viết</button>
@@ -635,6 +635,8 @@ textarea:focus-visible{outline:2px solid var(--red); outline-offset:1px;}
 </div>
 
 <script>
+const MAX_PLAYS = 3;
+
 const ROUTING = {
   reading: {
     passages: ["Hi Minh, Thanks for your message. I have already booked the tickets for Saturday's football match, so you don't need to buy one. The game starts at 3 p.m., but let's meet at the stadium at 2:30 so we can find good seats. If it rains, the match will still happen because the stadium has a roof. See you soon! — Anna"],
@@ -751,7 +753,7 @@ let state = {
   branchReadingAnswers: [],
   branchListeningAnswers: [],
   branchListeningPlays: [],
-  listeningRate: 0.95,
+  listeningRate: 0.9,
   timeLeft: 1320,
   timerId: null,
   finished: false,
@@ -928,7 +930,7 @@ function renderRouting(){
     '<div class="clip">' +
       '<div class="clip-head">' +
         '<button type="button" class="play-btn" id="rplay-'+i+'" onclick="playRoutingClip('+i+')">&#9658; Nghe đoạn '+(i+1)+'</button>' +
-        '<span class="plays-left" id="rplays-'+i+'">còn 2 lượt nghe</span>' +
+        '<span class="plays-left" id="rplays-'+i+'">còn '+MAX_PLAYS+' lượt nghe</span>' +
       '</div>' +
       '<div class="q-text">'+c.q+'</div>' +
       optionButtons(ROUTING.listening.clips, i, 'selectRoutingListening') +
@@ -944,11 +946,11 @@ function selectRoutingReading(i,j){
 }
 
 function playRoutingClip(i){
-  if(state.routingListeningPlays[i] >= 2) return;
+  if(state.routingListeningPlays[i] >= MAX_PLAYS) return;
   speak(ROUTING.listening.clips[i].text);
   state.routingListeningPlays[i]++;
-  document.getElementById('rplays-'+i).textContent = 'còn '+(2-state.routingListeningPlays[i])+' lượt nghe';
-  if(state.routingListeningPlays[i] >= 2) document.getElementById('rplay-'+i).disabled = true;
+  document.getElementById('rplays-'+i).textContent = 'còn '+(MAX_PLAYS-state.routingListeningPlays[i])+' lượt nghe';
+  if(state.routingListeningPlays[i] >= MAX_PLAYS) document.getElementById('rplay-'+i).disabled = true;
 }
 
 function selectRoutingListening(i,j){
@@ -1018,7 +1020,7 @@ function renderListening(){
     '<div class="clip">' +
       '<div class="clip-head">' +
         '<button type="button" class="play-btn" id="play-'+i+'" onclick="playClip('+i+')">&#9658; Nghe đoạn '+(i+1)+'</button>' +
-        '<span class="plays-left" id="plays-'+i+'">còn 2 lượt nghe</span>' +
+        '<span class="plays-left" id="plays-'+i+'">còn '+MAX_PLAYS+' lượt nghe</span>' +
       '</div>' +
       '<div class="q-text">'+c.q+'</div>' +
       optionButtons(branch.listening.clips, i, 'selectListening') +
@@ -1029,11 +1031,11 @@ function renderListening(){
 }
 
 function playClip(i){
-  if(state.branchListeningPlays[i] >= 2) return;
+  if(state.branchListeningPlays[i] >= MAX_PLAYS) return;
   speak(BRANCHES[state.listeningBranch].listening.clips[i].text);
   state.branchListeningPlays[i]++;
-  document.getElementById('plays-'+i).textContent = 'còn '+(2-state.branchListeningPlays[i])+' lượt nghe';
-  if(state.branchListeningPlays[i] >= 2) document.getElementById('play-'+i).disabled = true;
+  document.getElementById('plays-'+i).textContent = 'còn '+(MAX_PLAYS-state.branchListeningPlays[i])+' lượt nghe';
+  if(state.branchListeningPlays[i] >= MAX_PLAYS) document.getElementById('play-'+i).disabled = true;
 }
 
 function selectListening(i,j){
